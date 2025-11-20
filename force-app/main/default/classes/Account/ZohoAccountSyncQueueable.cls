@@ -12,12 +12,14 @@ public with sharing class ZohoAccountSyncQueueable implements Queueable{
 
     List<Account> accountsToSync = [SELECT Id, Name, Email__c, Phone, Website, Zoho_Checksum__c, External_Id__c FROM Account WHERE Id IN :accountIds];
     for(Account acc : accountsToSync){
+      ZohoAccountAdapter adapter = ZohoAccountAdapter.fromAccount(acc);
+      adapter.syncToZoho();
+
       if (acc.External_Id__c == null) {
         // New account so generate External Id usually from Zoho response after creation
         acc.External_Id__c = 'Zoho_' + acc.Id;
       }
 
-      ZohoAccountAdapter adapter = ZohoAccountAdapter.fromAccount(acc);
       String checkSum = adapter.calculateChecksum();
       acc.Zoho_Checksum__c = checkSum;
     }

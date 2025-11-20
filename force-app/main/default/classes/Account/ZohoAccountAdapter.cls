@@ -39,6 +39,14 @@ public with sharing class ZohoAccountAdapter {
         return this.originalAccount;
     }
 
+    public String syncToZoho() {
+        // Implement the logic to sync this account to Zoho using Zoho's API
+        // This is a placeholder for actual API integration code
+        String jsonPayload = this.toJson();
+        String zohoResponse = 'Success'; // Simulated response
+        return zohoResponse;
+    }
+
     public String toJson() {
         Map<String, Object> jsonMap = new Map<String, Object>();
         jsonMap.put('name', this.name);
