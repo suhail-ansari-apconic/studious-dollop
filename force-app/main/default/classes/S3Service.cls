@@ -1,8 +1,4 @@
 public with sharing class S3Service {
-    public S3Service() {
-
-    }
-
     private static Map<String, String> getCredentials() {
         // Retrieve AWS credentials from Named Credentials or Custom Settings
         Map<String, String> creds = new Map<String, String>();
